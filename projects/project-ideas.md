@@ -252,6 +252,14 @@ Relevant references:
 * [SSZ Query Language with Merkle Proofs](https://github.com/eth-protocol-fellows/cohort-six/blob/master/projects/ssz-ql-with-merkle-proofs.md.com)
 * [Electra Light Client Notes – SSZ Query Language](https://hackmd.io/@etan-status/electra-lc#SSZ-query-language)
 
+### EIP-8142: Block-in-Blobs (BiB) Proof of Concept
+
+By Francesco Risitano (EF zkEVM team)
+
+Today, validators verify execution payloads by downloading and re-executing them, so payload availability is implicit — a node cannot validate a block it has not downloaded. Once zkEVM execution proofs become available (see [EIP-8025: Optional Execution Proofs](https://eips.ethereum.org/EIPS/eip-8025)) and later mandatory, validators no longer need to download or execute the full payload to verify the state transition; they can verify a proof against the payload header. This removes the requirement for full payload fetching, instead validators can rely on data-availability sampling to assert that the payload data is published. [Block-in-Blobs (EIP-8142)](https://eips.ethereum.org/EIPS/eip-8142) makes that transition safe by ensuring execution-payload data availability via blobs: it requires the block producer to publish the execution-payload data (transactions and BALs) as prefix blobs of the beacon block's KZG-committed blobs. This allows the existing DAS mechanism to guarantee payload availability.
+
+This project would put a fellow on a proof-of-concept implementation of EIP-8142 — primarily in an execution client ([reth](https://github.com/paradigmxyz/reth) or [ethrex](https://github.com/lambdaclass/ethrex)), with the necessary corresponding changes in [Lighthouse](https://github.com/sigp/lighthouse), and support for the EIP's zkEVM-optimized variant via a guest program in [ere-guests](https://github.com/eth-act/ere-guests). The final deliverable is a devnet operating with BiB end-to-end on [Kurtosis](https://github.com/ethpandaops/ethereum-package).
+
 ### Decentralized CL checkpoint sync
 
 By Etan Kissling (Nimbus)
