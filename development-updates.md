@@ -11,15 +11,15 @@ Phase one is the very beginning of the cohort. The first few weeks are dedicated
 | Name/GH                                         | Week 0                                                                                              | Week 1 | Week 2 |
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------- | ------ | ------ |
 | [Abhivansh](https://github.com/akronim26)       | [Update 0](https://hackmd.io/@astaxxoo/ByJ3Fhtbzg)                                                  |        |        |
-| [Arsh](https://github.com/ArshLabs)             | [Update 0](https://hackmd.io/@arshlabs/HJtE30wWGg)                                                  |        |        |
+| [Arsh](https://github.com/ArshLabs)             | [Update 0](https://hackmd.io/@arshlabs/HJtE30wWGg)                                                  | [Update 1](https://hackmd.io/@arshlabs/S1v7ShSzfx) |        |
 | [Astrion](https://github.com/astrion-coder)     | [Update 0](https://hackmd.io/@Astrion/rJsS2ma-Gl)                                                   |        |        |
 | [Ayush](https://github.com/0xAysh/)             | [ Update 0](https://hackmd.io/@0xAysh/EPF7-week-0-update)                                           |        |        |
 | [Bankat](https://github.com/mananuf/)           | [Update 0](https://hackmd.io/@manbankat/ryn-CDrbfx)                                                 | [Update 1](https://hackmd.io/@manbankat/Bytif1yfMg) |        |
 | [Blessing](https://github.com/dicethedev/)      | [Update 0](https://hackmd.io/@dicethedev/HkHB60wZfl)                                                |        |        |
 | [Conall](https://github.com/XRS-001/)           | [ Update 0](https://docs.fileverse.io/d/02001110001b#k=0YDBXHva0sJIlCC108YBhFhNP_4PFWtxqoGaQOqcFhM) |        |        |
-| [Cristian](https://github.com/conache/)         | [ Update 0](https://hackmd.io/@conache/rywURItWzx)                                                  |        |        |
+| [Cristian](https://github.com/conache/)         | [ Update 0](https://hackmd.io/@conache/rywURItWzx)                                                  | [ Update 1](https://hackmd.io/@conache/B1KnVvrfGe)        |        |
 | [Ifeoluwa](https://github.com/owanikin)         |                                                   | [ Update 1](https://hackmd.io/@ZpBFaS-NSO-5Xkdm4jwolg/BJO7iYpWMx)       |        |
-| [Daniel](https://github.com/perfogic)           | [Update 0](https://hackmd.io/@rY6uGs23RIKpNYTQc4mY_g/SkvmzE0Zfe)                                    |        |        |
+| [Daniel](https://github.com/perfogic)           | [Update 0](https://hackmd.io/@perfogic/SkvmzE0Zfe)                                    | [Update 1](https://hackmd.io/@perfogic/HJKmk8WGze) |        |
 | [Ivan](https://github.com/IvanAnishchuk)        | [Update 0](https://ivananishchuk.github.io/eth-protocol-fellowship/updates/2026-06-17-week-0/)      |        |        |
 | [Jack CC](https://github.com/JackCC703/)        | [Update 0](https://hackmd.io/@jackcc/epf7-week0)                                                    |        |        |
 | [Jeff](https://www.github.com/jeffoodchain)     | [Update 0](https://hackmd.io/BEM-xj5dRBeh3MGHYIvYeQ)                                                |        |        |
@@ -32,6 +32,7 @@ Phase one is the very beginning of the cohort. The first few weeks are dedicated
 | [Meek](https://github.com/mmsaki)               | [Update 0](https://hackmd.io/@YBDu_chCTnKXFnYTkux9tQ/HJ5Rqa1zzx)                                     | [Update 1](https://hackmd.io/@YBDu_chCTnKXFnYTkux9tQ/rJvMCpJzfg) |        |
 | [Mohit](https://github.com/groverInnovate)      | [Update 0](https://hackmd.io/@groverInnovate/EPF7_Week0)                                            |        |        |
 | [Parth](https://github.com/ParthSinghPS)        | [Update 0](https://hackmd.io/@ParthSinghPS/HJMWUn6xzg)                                              |        |        |
+| [Parth Dagia](https://github.com/parthdagia05)  | [Update 0](https://hackmd.io/@lw7hY5nDSFS83Br8wInrJg/HJuwIDSGze)                                    |        |        |
 | [Rahul](https://github.com/rahulbarmann/)       | [Update 0](https://hackmd.io/@8t0zzURJSC6IX5BOuOiGqQ/Sk0vwhHZfg)                                    |        |        |
 | [Richard](https://github.com/richardgreg)      | [Update 0](https://richardgreg.github.io/ethereum-protocol-fellowship/2026/06/10/week-0.html)        |        |        |
 | [Roheemah](https://github.com/AbolareRoheemah)      |        | [Update 1](https://hackmd.io/@rhorheeymarh/HJuU07XGfl)       |        |
@@ -39,7 +40,7 @@ Phase one is the very beginning of the cohort. The first few weeks are dedicated
 | [Tosin](https://www.github.com/tosynthegeek)    | [Update 0](https://hackmd.io/@tosynthgeek/BJCL-EFbfe)                                               |        |        |
 | [Ray](https://github.com/rayjun)                | [Update 0](https://hackmd.io/@zBK5wwtLTrqYmlLNZd8CPA/HJKQsAi-Me)                                    |        |        |
 | [Sameer](https://github.com/SamAg19)            | [Update 0](https://hackmd.io/@samag19/BkqGmuHbzl)                                                   |        |        |
-| [Vansh](https://github.com/vanshsahay)          | [Update 0](https://hackmd.io/@vanshsahay/ByEF5juZMl)                                                 |        |        |
+| [Vansh](https://github.com/vanshsahay)          | [Update 0](https://hackmd.io/@vanshsahay/ByEF5juZMl)                                                | [Update 1](https://hackmd.io/@vanshsahay/SkFMZTrMGx) |        |
 | [Zidan](https://github.com/mzf11125)            | [Update 0](https://hackmd.io/@MpYoLwpETrKvUBs2PpmPxA/BJC-dHOZze)                                    | [Update 1](https://hackmd.io/@MpYoLwpETrKvUBs2PpmPxA/ByWhfCLfMg) |        |
 
 ## Phase 2: Deep dive
