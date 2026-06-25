@@ -100,3 +100,28 @@ When submitting a PR, make sure you are using the latest main branch. Otherwise 
 When merging someone else's PR, use your best judgement and ask if you are unsure. 
 
 If your IDE or system creates some hidden config files (e.g. `.vscode/...`), please make sure you don't upload them to the repo by updating the `.gitignore`. 
+
+### Automatic table merging
+
+`development-updates.md` is a single large table edited by everyone, so PRs frequently show merge conflicts even when two people just filled different cells. This is caused by markdown column-width whitespace, not by real conflicting edits. The repo automates the fix so you rarely need to resolve a conflict by hand.
+
+**What runs automatically**
+
+- A GitHub Action ([`.github/workflows/auto-merge-dev-updates.yml`](/.github/workflows/auto-merge-dev-updates.yml)) runs whenever a PR touching the table is opened or updated. It merges the latest base branch into your PR branch using a *semantic* table merge, re-formats the table, and pushes the result back to your branch. It keeps everyone's existing data (filled cells and rows are never deleted) and adds your update on top. When the run is green, your PR is mergeable.
+- To run it on an existing/older PR (one opened before this automation existed, so the workflow never fired on it), a maintainer goes to **Actions → dev-updates mergeable → Run workflow** and enters the PR number. Pushing any new commit to the PR also triggers it.
+- For the action to push to your fork branch, keep **"Allow edits by maintainers"** checked when opening the PR (it's on by default). If it's off, the run fails and you can run the formatter yourself (below).
+- Only genuine conflicts (two different links in the *same* cell) make the run fail; resolve those manually by looking for `<!-- CONFLICT ... -->` markers.
+
+**Doing it locally**
+
+The same logic lives in [`scripts/dev_updates.py`](/scripts/dev_updates.py) (Python 3, no dependencies):
+
+```
+# format the table canonically (idempotent)
+python3 scripts/dev_updates.py format development-updates.md
+
+# one-time: make `git merge`/`rebase`/`pull` resolve the table automatically
+bash scripts/setup-merge-driver.sh
+```
+
+After running the setup script once, keeping your branch in sync (`git rebase epf7/main` or `git pull`) merges the table for you without conflicts.

@@ -5,13 +5,19 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened]
     paths: ['development-updates.md']
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'PR number to sync (use this for older PRs)'
+        required: true
+        type: string
 
 permissions:
   contents: write
   pull-requests: read
 
 concurrency:
-  group: dev-updates-${{ github.event.pull_request.number }}
+  group: dev-updates-${{ github.event.pull_request.number || github.event.inputs.pr }}
   cancel-in-progress: true
 
 jobs:
@@ -21,7 +27,9 @@ jobs:
       - name: Checkout base branch scripts (from base repo, never PR code)
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.ref }}
+          # On a PR event use its base branch; on manual dispatch this is empty
+          # so checkout falls back to the repo default branch (where scripts live).
+          ref: ${{ github.event.pull_request.base.ref || github.event.repository.default_branch }}
           fetch-depth: 0
           persist-credentials: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,7 +41,7 @@ jobs:
       - name: Resolve table conflict and sync PR branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.inputs.pr }}
         run: |
           set -euo pipefail
           git config user.name  "github-actions[bot]"
