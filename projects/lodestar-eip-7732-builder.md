@@ -23,11 +23,11 @@ This project implements the missing Lodestar-side builder for that lifecycle. Th
 
 The project touches block production, MEV, auctions, payload availability, fork choice, trustless payment, and censorship-resistance design. Vitalik's writing on [enshrinement](https://vitalik.eth.limo/general/2023/09/30/enshrinement.html) frames why some guarantees become stronger when the protocol can enforce them directly, and [The Scourge](https://vitalik.eth.limo/general/2024/10/20/futures3.html) frames block construction as a centralization-risk area. Mike Neuder and Justin Drake's [Why enshrine Proposer-Builder Separation?](https://ethresear.ch/t/why-enshrine-proposer-builder-separation-a-viable-path-to-epbs/15710) is directly relevant to the project's motivation. In-protocol PBS reduces relay trust, improves accountability, and makes the proposer-builder market protocol-native.
 
-Prior EPF cohorts implemented the consensus side of ePBS in Prysm, Nimbus, and Lighthouse, all centered on the spec and the self-build path. Outside the clients, ethpandaops shipped [buildoor](https://github.com/ethpandaops/buildoor), a standalone builder+relay with an ePBS mode used for devnet lifecycle testing. What Lodestar does not yet have is a consensus-client-native builder actor. That is where this project sits, with buildoor as a reference implementation and interop peer.
+Prior EPF cohorts implemented the consensus side of ePBS in Prysm, Nimbus, and Lighthouse, all centered on the spec and the self-build path. Outside the clients, ethpandaops shipped [buildoor](https://github.com/ethpandaops/buildoor), a standalone builder+relay with an ePBS mode used for devnet lifecycle testing. What Lodestar does not yet have is a consensus-client-native builder actor. That is where this project sits, with [buildoor](https://github.com/ethpandaops/buildoor) as a reference implementation and interop peer.
 
 Our research into this topic so far suggests Lodestar already has much of the Gloas infrastructure. Types, gossip topics, proposer-preference plumbing, bid validation, bid-pool logic, self-build paths, envelope validation, PTC logic, and builder registry work already exist in Lodestar. The missing piece is the external builder loop itself.
 
-We also researched FOCIL / EIP-7805 because it affects future builder payload construction, but it is not in the scheduled Glamsterdam set -- the [Glamsterdam meta EIP-7773](https://eips.ethereum.org/EIPS/eip-7773) lists EIP-7805 under Declined for Inclusion -- and Lodestar already has substantial FOCIL work on a dedicated draft branch, with the Heze bid shape still moving ([consensus-specs #5410](https://github.com/ethereum/consensus-specs/pull/5410), proposes re-adding the inclusion-list bitlist to bids).
+We also researched FOCIL / EIP-7805 because it affects future builder payload construction, but it is not in the scheduled Glamsterdam set -- the [Glamsterdam meta EIP-7773](https://eips.ethereum.org/EIPS/eip-7773) lists EIP-7805 under Declined for Inclusion -- and Lodestar already has substantial [FOCIL work](https://github.com/ChainSafe/lodestar/tree/focil) on a dedicated draft branch, with the Heze bid shape still moving ([consensus-specs #5410](https://github.com/ethereum/consensus-specs/pull/5410), proposes re-adding the inclusion-list bitlist to bids).
 
 Deathstar is a better stretch fit for us. The project board describes it as an adversarial Lodestar node for causing chaos on Glamsterdam devnets, a builder creates natural adversarial cases, and a public [`deathstar` branch](https://github.com/ChainSafe/lodestar/tree/deathstar) with an ePBS chaos-feature catalog already exists. Our plan is to document the possible adversarial builder scenarios from the start, and attempt to implement them in Deathstar only if the honest Builder path is already in good shape.
 
@@ -75,7 +75,7 @@ Deathstar is included only as a builder-specific stretch, fed by an adversarial 
 
 ## Specification
 
-EIP-7732 removes the direct execution payload, blob commitments, and execution requests from the beacon block body; the body instead carries a `signed_execution_payload_bid` and payload attestations, with the full payload revealed later through a signed envelope. The [Gloas honest-builder spec](https://github.com/ethereum/consensus-specs/blob/dev/specs/gloas/builder.md) describes the builder as a staked actor that submits bids and later submits payloads; accepted bids commit the builder to pay the proposer whether or not the payload is submitted. The [p2p spec](https://github.com/ethereum/consensus-specs/blob/dev/specs/gloas/p2p-interface.md) defines the gossip surface (`execution_payload_bid`, `execution_payload`, `payload_attestation_message`, `proposer_preferences`) and its validation rules.
+EIP-7732 removes the direct execution payload, blob commitments, and execution requests from the beacon block body; the body instead carries a `signed_execution_payload_bid` and payload attestations, with the full payload revealed later through a signed envelope. The [Gloas honest-builder spec](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/builder.md) describes the builder as a staked actor that submits bids and later submits payloads; accepted bids commit the builder to pay the proposer whether or not the payload is submitted. The [p2p spec](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/p2p-interface.md) defines the gossip surface (`execution_payload_bid`, `execution_payload`, `payload_attestation_message`, `proposer_preferences`) and its validation rules.
 
 On the Lodestar side, the current code can already produce a block with a provided builder bid, and the self-build path constructs a bid with `BUILDER_INDEX_SELF_BUILD` (defined as `Infinity` in `packages/params`). The remaining gap is the external builder. The builder is an actor that owns a builder key, observes preferences, builds a payload, signs and publishes a bid, remembers the exact payload package the bid commits to, detects a win, and reveals the envelope.
 
@@ -85,7 +85,7 @@ A compact current-state map:
 | --- | --- | --- |
 | Gloas types and topics | Present / active in Lodestar | Reuse |
 | Proposer preferences | Present from validator/proposer side | Consume from builder side |
-| Bid validation and bid pool | Present / active | Produce valid bids |
+| Bid validation, bid pool, auctioning | Present / active | Produce valid bids |
 | Self-build path | Present (`BUILDER_INDEX_SELF_BUILD`) | Generalize to external builder |
 | Bid publication | Endpoint exists | Call from builder |
 | Payload construction | Engine API path exists (`engine_getPayloadV6`) | Use as local payload source |
@@ -96,6 +96,7 @@ A compact current-state map:
 | Envelope reveal | Validation/publish paths active | Build, sign, publish from builder |
 | Devnet builder tooling | buildoor runs the ePBS lifecycle standalone | Interop peer / comparison target |
 | Deathstar | Existing branch + chaos catalog | Stretch only after Builder works |
+| FOCIL (Heze adaptation) | Existing branch + PR review in progress | Stretch only if merged/settled |
 
 The first design question is where the builder should live. It could comprise a standalone `lodestar builder` command, a beacon-node service, a validator-client-adjacent service, or a temporary internal prototype that later becomes a command.
 
@@ -135,7 +136,7 @@ flowchart LR
     F --> G["Weeks 19-21+<br/>docs + report + handoff"]
 ```
 
-**Week 5 -- Proposal checkpoint.** Publish proposal + living note; align with Marko and Nico on scope, base branch, and the FOCIL/Deathstar stances; start the notebook. *Deliverable: accepted proposal and mentor-aligned scope.*
+**Week 5 -- Proposal checkpoint.** Publish proposal + living note; align with Nico on scope, base branch, and the FOCIL/Deathstar stances; start the notebook. *Deliverable: accepted proposal and mentor-aligned scope.*
 
 **Week 6 -- Architecture and code-path reconciliation.** Map the Gloas codepaths, confirm current PR state, propose where the builder should live, and get mentor sign-off before committing to the first implementation path. *Deliverable: architecture note and current-code map.*
 
@@ -177,7 +178,7 @@ flowchart LR
 
 **Base branch uncertainty.** `unstable`, a Glamsterdam devnet branch, or FOCIL-related work if Nico recommends it -- kept open deliberately.
 
-**Builder identity, registration, and balance.** Builders onboard through dedicated EIP-8282 deposit/exit request contracts (deposits carry inline-verified proofs of possession; exits are authorized by the builder's execution address), need active status and excess balance covering bids plus pending payments, and Lodestar's `Infinity` self-build sentinel is not a valid `uint64`. Registration must be reproducible on a devnet, and deposit-signature verification is a known performance surface (Lodestar #9436).
+**Builder identity, registration, and balance.** Builders onboard through dedicated EIP-8282 deposit/exit request contracts (deposits carry inline-verified proofs of possession; exits are authorized by the builder's execution address), need active status and excess balance covering bids plus pending payments. Registration must be reproducible on a devnet, and deposit-signature verification is a known performance surface (Lodestar #9436).
 
 **Payload cache correctness.** The exact bid -> payload mapping must survive to reveal; misses and mismatches fail closed. Recent envelope-cache and idempotency PRs show this path has real resource and correctness edge cases.
 
@@ -211,8 +212,8 @@ The project counts as finished and successful if the honest builder loop is impl
 ## Resources
 
 - **[Living technical note](https://hackmd.io/PLACEHOLDER)** -- companion document: full PR map, code-path map, cache design, bid-policy notes, Deathstar notebook, resource library
-- [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732) - Gloas [builder](https://github.com/ethereum/consensus-specs/blob/dev/specs/gloas/builder.md) and [p2p](https://github.com/ethereum/consensus-specs/blob/dev/specs/gloas/p2p-interface.md) specs - [EIP-7773 (Glamsterdam meta)](https://eips.ethereum.org/EIPS/eip-7773) - [EIP-8282 (builder deposits/exits)](https://eips.ethereum.org/EIPS/eip-8282)
+- [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732) - Gloas [builder](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/builder.md) and [p2p](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/p2p-interface.md) specs - [EIP-7773 (Glamsterdam meta)](https://eips.ethereum.org/EIPS/eip-7773) - [EIP-8282 (builder deposits/exits)](https://eips.ethereum.org/EIPS/eip-8282)
 - EPF7 project ideas: [Builder](https://github.com/eth-protocol-fellows/cohort-seven/blob/master/projects/project-ideas.md#lodestar-eip-7732-builder) - [Deathstar](https://github.com/eth-protocol-fellows/cohort-seven/blob/master/projects/project-ideas.md#lodestar-adversarial-node)
 - [Lodestar](https://github.com/ChainSafe/lodestar) - the builder gap: [`produceBlockBody.ts`](https://github.com/ChainSafe/lodestar/blob/unstable/packages/beacon-node/src/chain/produceBlock/produceBlockBody.ts) - [Deathstar chaos catalog](https://github.com/ChainSafe/lodestar/blob/deathstar/EPBS_CHAOS_FEATURES.md)
 - [buildoor](https://github.com/ethpandaops/buildoor) - [ethereum-package](https://github.com/ethpandaops/ethereum-package) - [glamsterdam-devnet-6](https://dora.glamsterdam-devnet-6.ethpandaops.io/)
-- [Why enshrine PBS?](https://ethresear.ch/t/why-enshrine-proposer-builder-separation-a-viable-path-to-epbs/15710) - [PTC: an ePBS design](https://ethresear.ch/t/payload-timeliness-committee-ptc-an-epbs-design/16054) - [The Free Option Problem in ePBS](https://collective.flashbots.net/t/the-free-option-problem-in-epbs/5115) - [Who Wins Ethereum Block Building Auctions and Why?](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.AFT.2024.22) - [Block vs. Slot Auction PBS](https://mirror.xyz/julianma.eth/CPYI91s98cp9zKFkanKs_qotYzw09kWvouaAa9GXBrQ) (Ma)
+- [Why enshrine PBS?](https://ethresear.ch/t/why-enshrine-proposer-builder-separation-a-viable-path-to-epbs/15710) - [PTC: an ePBS design](https://ethresear.ch/t/payload-timeliness-committee-ptc-an-epbs-design/16054) - [The Free Option Problem in ePBS](https://collective.flashbots.net/t/the-free-option-problem-in-epbs/5115) - [Who Wins Ethereum Block Building Auctions and Why?](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.AFT.2024.22) - [Block vs. Slot Auction PBS](https://mirror.xyz/julianma.eth/CPYI91s98cp9zKFkanKs_qotYzw09kWvouaAa9GXBrQ) (Julian Ma)
