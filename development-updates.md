@@ -88,9 +88,9 @@ With the gained insight into the protocol, the following weeks serve as a deep d
 | [Kapil](https://github.com/Kapil-K-Kathiriya)        |                                                                  |        |        |                  |
 | [Keshav](https://www.github.com/keshavsharma25)      |                                                                  |        |        |                  |
 | [Kimi](https://github.com/KimiWu123)                 | [Update 3](https://hackmd.io/@kimiwu/r1rDNxSmMx)                 |        |        |                  |
-| [Kris](https://github.com/krisoshea-eth/)            | [Update 3](https://hackmd.io/@krisos/BkiFy_KXMx)                 |        |        |                  |
+| [Kris](https://github.com/krisoshea-eth/)            | [Update 3](https://hackmd.io/@krisos/BkiFy_KXMx)                 |        |        | [Proposal](projects/lodestar-eip-7732-builder.md) |
 | [Mario](https://github.com/taxmeifyoucan/)           |                                                                  |        |        |                  |
-| [Marko](https://github.com/markolazic01)             | [Update 3](https://hackmd.io/@lqzic/week-3-update)               |        |        |                  |
+| [Marko](https://github.com/markolazic01)             | [Update 3](https://hackmd.io/@lqzic/week-3-update)               |        |        | [Proposal](projects/lodestar-eip-7732-builder.md) |
 | [Mary](https://github.com/maryodior)                 | [Update 3](https://hackmd.io/@x68iqv9FTyOkG8bkePB-mw/BJv8c69XMl) |        |        |                  |
 | [Meek](https://github.com/mmsaki)                    |                                                                  |        |        |                  |
 | [Mohit](https://github.com/groverInnovate)           |                                                                  |        |        |                  |
