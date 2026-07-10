@@ -4,13 +4,13 @@ Build an honest-path `lodestar builder` for EIP-7732 / Gloas: a Lodestar-native 
 
 ## Motivation
 
-Ethereum block production already relies heavily on proposer-builder separation, but today's production PBS flow depends on extra-protocol relay infrastructure between validators and builders.
+Ethereum block production already relies heavily on proposer-builder separation, but today's production PBS flow depends on extra-protocol relay infrastructure between validators and builders -- a trusted intermediary sitting in the protocol's most valuable path.
 
 [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732), enshrined proposer-builder separation or ePBS, moves that exchange into the protocol. Instead of including the full `ExecutionPayload` directly in the beacon block, the beacon block carries a signed builder commitment, `SignedExecutionPayloadBid`. The builder later reveals the matching payload through a `SignedExecutionPayloadEnvelope`, and Payload Timeliness Committee members attest whether the payload and blob data were revealed in time.
 
 This project implements the missing Lodestar-side builder for that lifecycle. The [EPF7 project board](https://github.com/eth-protocol-fellows/cohort-seven/blob/master/projects/project-ideas.md#lodestar-eip-7732-builder) describes it as an in-protocol `lodestar builder` under EIP-7732 for Glamsterdam that will submit p2p bids every slot based on locally produced payloads from vanilla execution-layer software such as Nethermind or Ethrex, publish the payload if it wins, and pay the proposer through trustless payment. The purpose of this project is also exploratory. In other words, we aim to find spec gaps that need to be resolved for a consensus client to cleanly act as a builder.
 
-Prior EPF cohorts implemented the consensus side of ePBS in Prysm, Nimbus, and Lighthouse, all centered on the spec and the self-build path. Outside the clients, ethpandaops shipped [buildoor](https://github.com/ethpandaops/buildoor), a standalone builder+relay with an ePBS mode used for devnet lifecycle testing. What Lodestar does not yet have is a consensus-client-native builder actor. That is where this project sits, with [buildoor](https://github.com/ethpandaops/buildoor) as a reference implementation and interop peer.
+Prior EPF cohorts implemented the consensus side of ePBS in Prysm, Nimbus, and Lighthouse, all centered on the spec and the self-build path. Outside the clients, ethpandaops shipped [buildoor](https://github.com/ethpandaops/buildoor), a standalone builder+relay with an ePBS mode used for devnet lifecycle testing. What Lodestar does not yet have is a consensus-client-native builder actor. That is where this project sits, with buildoor as a reference implementation and interop peer.
 
 Our research into this topic so far suggests Lodestar already has much of the Gloas infrastructure. Types, gossip topics, proposer-preference plumbing, bid validation, bid-pool logic, self-build paths, envelope validation, PTC logic, and builder registry work already exist in Lodestar. The missing piece is the external builder loop itself.
 
@@ -44,7 +44,9 @@ sequenceDiagram
 
 A baseline bid policy is enough for the first version: either a fixed value or a fixed shade below a rough payload-value estimate. If the implementation stabilizes early, a more sophisticated policy becomes stretch work, using payload value, builder balance, pending payments, competing-bid assumptions, and free-option risk.
 
-Deathstar is included only as a builder-specific stretch, fed by an adversarial notebook kept alongside the Builder work. FOCIL is included only as future-fork context and base-branch uncertainty. If FOCIL merges to `unstable` and the core Builder path is stable enough, a Heze / FOCIL adaptation pass can become strong-success work after implementation discussions with the Lodestar team. A living technical note (link to be added before merge) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
+Deathstar is included only as a builder-specific stretch, fed by an adversarial notebook kept alongside the Builder work.
+
+FOCIL is included only as future-fork context and base-branch uncertainty. If FOCIL merges to `unstable` and the core Builder path is stable enough, a Heze / FOCIL adaptation pass can become strong-success work after implementation discussions with the Lodestar team. A living technical note (link to be added before merge) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
 
 **Scope summary**
 
@@ -144,7 +146,7 @@ flowchart LR
 
 **Payload cache correctness.** The exact bid -> payload mapping must survive to reveal; misses and mismatches fail closed. Recent envelope-cache and idempotency PRs show this path has real resource and correctness edge cases.
 
-**Timing and PTC visibility.** The reveal must beat the payload deadline for the PTC -- and, since #5210, a late payload is forcibly reorged by the next proposer. Local success may not imply devnet success under real propagation.
+**Timing and PTC visibility.** The reveal must beat the payload deadline for the PTC -- and, since [consensus-specs #5210](https://github.com/ethereum/consensus-specs/pull/5210), a late payload is forcibly reorged by the next proposer. Local success may not imply devnet success under real propagation.
 
 **Bid policy.** Fixed-value is enough for the honest path, but a stronger builder eventually needs payload value, competing bids, balance constraints, canonical-inclusion risk, and free-option incentives -- an unbounded research surface kept behind the extension gate.
 
@@ -152,11 +154,23 @@ flowchart LR
 
 The project is successful if Lodestar has a working, tested, and documented honest-path EIP-7732 builder prototype.
 
-**Minimum success:** an architecture note; a builder service/command skeleton with configuration and key-handling design; proposer-preference lookup; a local payload-construction path; bid construction, signing, and p2p publication; the bid -> payload cache; winning-bid detection; envelope construction, signing, and publication; tests covering the core bid and reveal path; documentation of spec gaps, Lodestar gaps, devnet assumptions, and FOCIL base-branch context; and a Deathstar notebook of builder-specific adversarial cases.
+**Minimum success:**
 
-**Strong success:** a reproducible local end-to-end demo, a real local execution client, a configurable bid policy, logs and metrics for bid/win/reveal/timing, one or more PRs merged or in review, a Heze / FOCIL adaptation pass if FOCIL has merged to `unstable` and Lodestar team discussions make it useful, and a final write-up of what existed, what was added, and what remains.
+- Architecture note and builder service/command skeleton with configuration and key-handling design.
+- Proposer-preference lookup, local payload construction, bid construction/signing/p2p publication, bid -> payload cache, winning-bid detection, and envelope construction/signing/publication.
+- Core bid/reveal-path tests and documentation of spec gaps, Lodestar gaps, devnet assumptions, FOCIL base-branch context, and builder-specific Deathstar adversarial cases.
 
-**Stretch success:** an improved bid policy beyond a fixed constant, a builder-adversarial Deathstar matrix with one or two implemented scenarios, a deeper write-up of builder bidding constraints under ePBS, and follow-up issues for future adversarial builder work.
+**Strong success:**
+
+- Reproducible local end-to-end demo with a real local execution client.
+- Configurable bid policy plus bid/win/reveal/timing logs and metrics.
+- One or more PRs merged or in review, a Heze / FOCIL adaptation pass if FOCIL has merged to `unstable` and Lodestar team discussions make it useful, and a final write-up of what existed, what was added, and what remains.
+
+**Stretch success:**
+
+- Improved bid policy beyond a fixed constant.
+- Builder-adversarial Deathstar matrix with one or two implemented scenarios.
+- Deeper write-up of builder bidding constraints under ePBS and follow-up issues for future adversarial builder work.
 
 The project counts as finished and successful if the honest builder loop is implemented and documented.
 
