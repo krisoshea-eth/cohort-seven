@@ -44,9 +44,7 @@ sequenceDiagram
 
 A baseline bid policy is enough for the first version: either a fixed value or a fixed shade below a rough payload-value estimate. If the implementation stabilizes early, a more sophisticated policy becomes stretch work, using payload value, builder balance, pending payments, competing-bid assumptions, and free-option risk.
 
-Deathstar is included only as a builder-specific stretch, fed by an adversarial notebook kept alongside the Builder work.
-
-FOCIL is included only as future-fork context and base-branch uncertainty. If FOCIL merges to `unstable` and the core Builder path is stable enough, a Heze / FOCIL adaptation pass can become strong-success work after implementation discussions with the Lodestar team. A living technical note (link to be added before merge) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
+Deathstar and FOCIL remain gated stretch work, summarized below. A living technical note (link to be added before merge) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
 
 **Scope summary**
 
@@ -142,7 +140,7 @@ flowchart LR
 
 **Base branch uncertainty.** `unstable`, a Glamsterdam devnet branch, or FOCIL-related work based on discussions with the Lodestar team -- kept open deliberately.
 
-**Builder identity, registration, and balance.** Builders onboard through dedicated EIP-8282 deposit/exit request contracts (deposits carry inline-verified proofs of possession; exits are authorized by the builder's execution address), need active status and excess balance covering bids plus pending payments. Registration must be reproducible on a devnet, and deposit-signature verification is a known performance surface (Lodestar #9436).
+**Builder identity, registration, and balance.** Builders onboard through dedicated EIP-8282 deposit/exit request contracts (deposits carry inline-verified proofs of possession; exits are authorized by the builder's execution address), need active status and excess balance covering bids plus pending payments. Registration must be reproducible on a devnet, and deposit-signature verification is a known performance surface ([Lodestar #9436](https://github.com/ChainSafe/lodestar/pull/9436)).
 
 **Payload cache correctness.** The exact bid -> payload mapping must survive to reveal; misses and mismatches fail closed. Recent envelope-cache and idempotency PRs show this path has real resource and correctness edge cases.
 
@@ -171,8 +169,6 @@ The project is successful if Lodestar has a working, tested, and documented hone
 - Improved bid policy beyond a fixed constant.
 - Builder-adversarial Deathstar matrix with one or two implemented scenarios.
 - Deeper write-up of builder bidding constraints under ePBS and follow-up issues for future adversarial builder work.
-
-The project counts as finished and successful if the honest builder loop is implemented and documented.
 
 ## Collaborators
 
