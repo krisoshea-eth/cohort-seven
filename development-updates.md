@@ -10,7 +10,7 @@ Phase one is the very beginning of the cohort. The first few weeks are dedicated
 
 | Name/GH                                              | Week 0                                                                                              | Week 1                                                                                                | Week 2                                                            |
 | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| [Aarish](https://github.com/aarishnaiyer)            | [Update 0](https://hackmd.io/@KkIQfF7fRl6hdN__0PApfw/Syz-F0gzMg)                                    | [Update 1](https://hackmd.io/@KkIQfF7fRl6hdN__0PApfw/SknpMWtGMg)                                      |                                                                   |
+| [Aarish](https://github.com/aarishnaiyer)            | [Update 0](https://hackmd.io/@KkIQfF7fRl6hdN__0PApfw/Syz-F0gzMg)                                    | [Update 1](https://hackmd.io/@KkIQfF7fRl6hdN__0PApfw/SknpMWtGMg)                                      | [Update 2](https://hackmd.io/@KkIQfF7fRl6hdN__0PApfw/Sy-ZApaQzl)  |
 | [Abhivansh](https://github.com/akronim26)            | [Update 0](https://hackmd.io/@astaxxoo/ByJ3Fhtbzg)                                                  | [Update 1](https://hackmd.io/MFdwjsweSaW6i9UfWfp29g)                                                  | [Update 2](https://hackmd.io/@astaxxoo/HJN2xMl7Mg)                |
 | [Aiden](https://github.com/sgtSong)            |                                                  |                                                 | [Update 2](https://hackmd.io/@25ukZNryRaCcOYnb7k0kLA/HJp4uIWQGg)                |
 | [Arsh](https://github.com/ArshLabs)                  | [Update 0](https://hackmd.io/@arshlabs/HJtE30wWGg)                                                  | [Update 1](https://hackmd.io/@arshlabs/S1v7ShSzfx)                                                    | [Update 2](https://hackmd.io/@arshlabs/B1jDUeJ7Ml)                |
@@ -60,7 +60,7 @@ Phase one is the very beginning of the cohort. The first few weeks are dedicated
 | [Zidan](https://github.com/mzf11125)                 | [Update 0](https://hackmd.io/@MpYoLwpETrKvUBs2PpmPxA/BJC-dHOZze)                                    | [Update 1](https://hackmd.io/@MpYoLwpETrKvUBs2PpmPxA/ByWhfCLfMg)                                      | [Update 2](https://hackmd.io/@MpYoLwpETrKvUBs2PpmPxA/Skfp9Wqmzg)   |
 
 ## Phase 2: Deep dive
-
+z
 With the gained insight into the protocol, the following weeks serve as a deep dive into a chosen topic. Read about [proposed projects](/projects/project-ideas.md) and choose one to dive into. By the first month, you should finish the initial research about a specific problem and propose a project, including a roadmap. Get some ideas from the [project proposal template](projects/project-template.md).
 
 | Name/GH                                              | Week 3                                                           | Week 4 | Week 5 | Project Proposal |
@@ -68,14 +68,14 @@ With the gained insight into the protocol, the following weeks serve as a deep d
 | [Aarish](https://github.com/aarishnaiyer)            |                                                                  |        |        |                  |
 | [Abhivansh](https://github.com/akronim26)            | [Update 3](https://hackmd.io/@astaxxoo/HJAX2VtQfg)               |        |        |                  |
 | [Aiden](https://github.com/sgtSong)                  |                                                                  |        |        |                  |
-| [Arsh](https://github.com/ArshLabs)                  | [Update 3](https://hackmd.io/@arshlabs/HklneUmO7zx)              |        |        |                  |
+| [Arsh](https://github.com/ArshLabs)                  | [Update 3](https://hackmd.io/@arshlabs/HklneUmO7zx)              | [Update 4](https://hackmd.io/@arshlabs/B1m1FC0Qfx) |        |                  |
 | [Astrion](https://github.com/astrion-coder)          | [Update 3](https://hackmd.io/@Astrion/BJ0TicqmGl)                |        |        |                  |
 | [Ayush](https://github.com/0xAysh/)                  | [Update 3](https://hackmd.io/@0xAysh/EPF-7-week-3-update)        |        |        |                  |
 | [Bankat](https://github.com/mananuf/)                |                                                                  |        |        |                  |
 | [Blessing](https://github.com/dicethedev/)           |                                                                  |        |        |                  |
 | [Charles](https://github.com/creese)                 |                                                                  |        |        |                  |
-| [Conall](https://github.com/XRS-001/)                |                                                                  |        |        |                  |
-| [Cristian](https://github.com/conache/)              | [Update 3](https://hackmd.io/@conache/BkU585LXMe)                |        |        |                  |
+| [Conall](https://github.com/XRS-001)                 |                                                                  |[Update 4](https://docs.fileverse.io/d/02001110002a#k=igG0pvX8y_LUvXXaKpu0gBrHgMIzcv-VCmRXEsOF_MU) | | |
+| [Cristian](https://github.com/conache/)              | [Update 3](https://hackmd.io/@conache/BkU585LXMe)                | [Update 4](https://hackmd.io/@conache/ByNLEikEfl) |        |                  |
 | [Daniel](https://github.com/perfogic)                | [Update 3](https://hackmd.io/@perfogic/rkJxeWdXMe)               |        |        |                  |
 | [Hans](https://github.com/vuonghuuhung)              | [Update 3](https://hackmd.io/@hansvuong/r1xrMLc_mMl)             |        |        |                  |
 | [Ifeoluwa](https://github.com/owanikin)              | [Update 3](https://hackmd.io/@ZpBFaS-NSO-5Xkdm4jwolg/B1SI4r_mze) |        |        |                  |
@@ -87,26 +87,26 @@ With the gained insight into the protocol, the following weeks serve as a deep d
 | [Josh](https://github.com/JO-OLADEJI)                |                                                                  |        |        |                  |
 | [Kapil](https://github.com/Kapil-K-Kathiriya)        |                                                                  |        |        |                  |
 | [Keshav](https://www.github.com/keshavsharma25)      |                                                                  |        |        |                  |
-| [Kimi](https://github.com/KimiWu123)                 | [Update 3](https://hackmd.io/@kimiwu/r1rDNxSmMx)                 |        |        |                  |
-| [Kris](https://github.com/krisoshea-eth/)            | [Update 3](https://hackmd.io/@krisos/BkiFy_KXMx)                 |        |        | [Proposal](projects/lodestar-eip-7732-builder.md) |
+| [Kimi](https://github.com/KimiWu123)                 | [Update 3](https://hackmd.io/@kimiwu/r1rDNxSmMx)                 | [Update 4](https://hackmd.io/@kimiwu/SJWLTf1Efx)  |        |                  |
+| [Kris](https://github.com/krisoshea-eth/)            | [Update 3](https://hackmd.io/@krisos/BkiFy_KXMx)                 |        |        | [Lodestar 7732 builder](projects/lodestar-eip-7732-builder.md) |
 | [Mario](https://github.com/taxmeifyoucan/)           |                                                                  |        |        |                  |
-| [Marko](https://github.com/markolazic01)             | [Update 3](https://hackmd.io/@lqzic/week-3-update)               |        |        | [Proposal](projects/lodestar-eip-7732-builder.md) |
+| [Marko](https://github.com/markolazic01)             | [Update 3](https://hackmd.io/@lqzic/week-3-update)               |        |        | [Lodestar 7732 builder](projects/lodestar-eip-7732-builder.md) |
 | [Mary](https://github.com/maryodior)                 | [Update 3](https://hackmd.io/@x68iqv9FTyOkG8bkePB-mw/BJv8c69XMl) |        |        |                  |
 | [Meek](https://github.com/mmsaki)                    |                                                                  |        |        |                  |
 | [Mohit](https://github.com/groverInnovate)           |                                                                  |        |        |                  |
-| [Parth](https://github.com/ParthSinghPS)             | [Update 3](https://hackmd.io/@ParthSinghPS/SJ-pRiuQGg)           |        |        |                  |
+| [Parth](https://github.com/ParthSinghPS)             | [Update 3](https://hackmd.io/@ParthSinghPS/SJ-pRiuQGg)           | [Update 4](https://hackmd.io/@ParthSinghPS/SJOphFCmMg) |        |                  |
 | [Parth Dagia](https://github.com/parthdagia05)       | [Update 3](https://hackmd.io/@lw7hY5nDSFS83Br8wInrJg/S1OvQVu7Me) |        |        |                  |
 | [Rahul](https://github.com/rahulbarmann/)            | [Update 3](https://hackmd.io/@rahulbarman/SydhimimGl)            |        |        |                  |
 | [Raphina](https://github.com/stamp9/)                |                                                                  |        |        |                  |
 | [Ray](https://github.com/rayjun)                     |                                                                  |        |        |                  |
-| [Richard](https://github.com/richardgreg)            |                                                                  |        |        |                  |
+| [Richard](https://github.com/richardgreg)            | [Update 3](https://richardgreg.github.io/ethereum-protocol-fellowship/2026/06/30/week-3.html) |        |        |                  |
 | [Ritesh](https://github.com/Dyslex7c)                |                                                                  |        |        |                  |
 | [Roheemah](https://github.com/AbolareRoheemah)       | [Update 3](https://hackmd.io/@rhorheeymarh/HJaGVJYQMe)           |        |        |                  |
 | [Sagar](https://www.github.com/SoarinSkySagar)       | [Update 3](https://hackmd.io/@SoarinSkySagar/r1ieE-u7Ml)         |        |        |                  |
 | [Sahil](https://github.com/Sahilgill24)              |                                                                  |        |        |                  |
 | [Sameer](https://github.com/SamAg19)                 |                                                                  |        |        |                  |
-| [Soham](https://github.com/zemse)                    | [Update 3](https://hackmd.io/@zemse/r1dqoWK7Gx)                  |        |        |                  |
-| [Skas](https://www.github.com/Skanislav)             |                                                                  |        |        |                  |
+| [Soham](https://github.com/zemse)                    | [Update 3](https://hackmd.io/@zemse/r1dqoWK7Gx)                  | [Update 4](https://hackmd.io/@zemse/HkNAYmZVzl)        |        |                  |
+| [Skas](https://www.github.com/Skanislav)             | [Update 3](https://skas.gwei.domains/epf/epf-week-3/)            |        |        |                  |
 | [Steven](https://github.com/stevemilk)               | [Update 3](https://hackmd.io/@steven1/rk92llYQfe)                |        |        |                  |
 | [Tosin](https://www.github.com/tosynthegeek)         | [Update 2 & 3](https://hackmd.io/@tosynthgeek/rylPjYv7Mg)        |        |        |                  |
 | [Vansh](https://github.com/vanshsahay)               | [Update 3](https://hackmd.io/@vanshsahay/Bk1rs4GXGx)             |        |        |                  |
