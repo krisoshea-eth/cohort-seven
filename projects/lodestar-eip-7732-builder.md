@@ -44,7 +44,7 @@ sequenceDiagram
 
 A baseline bid policy is enough for the first version: either a fixed value or a fixed shade below a rough payload-value estimate. If the implementation stabilizes early, a more sophisticated policy becomes stretch work, using payload value, builder balance, pending payments, competing-bid assumptions, and free-option risk.
 
-Deathstar and FOCIL remain gated stretch work, summarized below. A living technical note (link to be added before merge) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
+Deathstar and FOCIL remain gated stretch work, summarized below. A companion [living technical note](https://hackmd.io/@krisos/S1a9mdB7fl) tracks code-path maps, PR state, open implementation questions, bid-policy notes, FOCIL context, and the Deathstar notebook.
 
 **Scope summary**
 
@@ -187,7 +187,7 @@ The project is successful if Lodestar has a working, tested, and documented hone
 
 ## Resources
 
-- **Living technical note** -- link to be added before merge; companion document for the full PR map, code-path map, cache design, bid-policy notes, Deathstar notebook, and resource library
+- **[Living technical note](https://hackmd.io/@krisos/S1a9mdB7fl)** -- companion document for the full PR map, code-path map, cache design, bid-policy notes, Deathstar notebook, and resource library
 - **Presentation** -- link to be added when the presentation exists
 - [EIP-7732](https://eips.ethereum.org/EIPS/eip-7732) - Gloas [builder](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/builder.md) and [p2p](https://github.com/ethereum/consensus-specs/blob/master/specs/gloas/p2p-interface.md) specs - [EIP-7773 (Glamsterdam meta)](https://eips.ethereum.org/EIPS/eip-7773) - [EIP-8282 (builder deposits/exits)](https://eips.ethereum.org/EIPS/eip-8282)
 - EPF7 project ideas: [Builder](https://github.com/eth-protocol-fellows/cohort-seven/blob/master/projects/project-ideas.md#lodestar-eip-7732-builder) - [Deathstar](https://github.com/eth-protocol-fellows/cohort-seven/blob/master/projects/project-ideas.md#lodestar-adversarial-node)
